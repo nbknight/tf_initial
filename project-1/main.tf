@@ -9,9 +9,7 @@ terraform {
 
 # Configure the AWS Provider
 provider "aws" {
-  region     = "us-east-1"
-  # access_key = "AKIARRRWYZ66CRMOGWEG"
-  # secret_key = "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"
+  region     = "us-east-2"
 
 }
 
@@ -55,7 +53,7 @@ resource "aws_route_table" "testRouteTable" {
 resource "aws_subnet" "subnet1" {
   vpc_id            = aws_vpc.testVpc.id
   cidr_block        = "10.0.1.0/24"
-  availability_zone = "us-east-1a"
+  availability_zone = "us-east-2a"
 
   tags = {
     Name = "subnet-1"
@@ -128,10 +126,11 @@ resource "aws_eip" "one" {
 }
 # 9. Create EC2
 resource "aws_instance" "web" {
-  ami               = "ami-0c02fb55956c7d316"
+  # ami               = "ami-0c02fb55956c7d316"
+  ami               = "ami-064ff912f78e3e561"
   instance_type     = "t2.micro"
   availability_zone = aws_subnet.subnet1.availability_zone
-  key_name          = "tf_test"
+  key_name          = "testing-nick"
 
   network_interface {
     device_index         = 0
